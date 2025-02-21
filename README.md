@@ -1,29 +1,44 @@
-# app_tiendas
 
-A new Flutter project.
+# App Tiendas
 
-## Getting Started
+Este proyecto es una aplicación móvil desarrollada con Flutter.
 
-This project is a starting point for a Flutter application that follows the
-[simple app state management
-tutorial](https://flutter.dev/to/state-management-sample).
+## Requisitos
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- Flutter versión 3.0.0 o superior
+- Dart versión 2.17.0 o superior
 
-## Assets
+## Instalación
 
-The `assets` directory houses images, fonts, and any other files you want to
-include with your application.
+1. Clona el repositorio:
+    ```sh
+    git clone https://github.com/tu_usuario/app_tiendas.git
+    ```
+2. Navega al directorio del proyecto:
+    ```sh
+    cd app_tiendas
+    ```
+3. Instala las dependencias:
+    ```sh
+    flutter pub get
+    ```
 
-The `assets/images` directory contains [resolution-aware
-images](https://flutter.dev/to/resolution-aware-images).
+## Ejecución
 
-## Localization
+1. Conecta un dispositivo físico o inicia un emulador.
+2. Corre la aplicación:
+    ```sh
+    flutter run
+    ```
 
-This project generates localized messages based on arb files found in
-the `lib/src/localization` directory.
+## Compilación
 
-To support additional languages, please visit the tutorial on
-[Internationalizing Flutter apps](https://flutter.dev/to/internationalization).
+Para compilar la aplicación para producción, usa el siguiente comando:
+```sh
+flutter build apk --release
+```
+
+## Información adicional
+
+Para más información sobre Flutter, visita la [documentación oficial](https://flutter.dev/docs).
+

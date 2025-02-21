@@ -2,7 +2,7 @@ import 'package:app_tiendas/src/app.dart';
 import 'package:app_tiendas/src/views/events/add_product_to_cart.event.dart';
 import 'package:app_tiendas/src/views/events/clear_cart.event.dart';
 import 'package:app_tiendas/src/views/events/remove_product_from_cart.event.dart';
-import 'package:app_tiendas/src/views/providers/cart.provider.dart';
+import 'package:app_tiendas/src/views/blocs/cart.bloc.dart';
 import 'package:app_tiendas/utils/debounce.dart';
 import 'package:flutter/foundation.dart';
 import 'package:provider/provider.dart';
@@ -16,20 +16,20 @@ mixin CartFragmentController {
 
   void initStateController() {
     
-    cartProviderListener();
-    navigatorContext.read<CartProvider>().addListener(cartProviderListener);
+    cartBlocListener();
+    navigatorContext.read<CartBloc>().addListener(cartBlocListener);
   }
 
   void disposeController() {
-    navigatorContext.read<CartProvider>().removeListener(cartProviderListener);
+    navigatorContext.read<CartBloc>().removeListener(cartBlocListener);
   }
 
-  void cartProviderListener() {
-    CartProvider provider = navigatorContext.read<CartProvider>();
-    if (provider.isLoading) return;
-    if (provider.cart == null) return;
+  void cartBlocListener() {
+    CartBloc bloc = navigatorContext.read<CartBloc>();
+    if (bloc.isLoading) return;
+    if (bloc.cart == null) return;
 
-    cartQuantityNotifier.value = provider.cart!.cartProducts
+    cartQuantityNotifier.value = bloc.cart!.cartProducts
         .fold<Map<String, int>>({}, (previousValue, element) {
       previousValue[element.productId] = element.quantity;
       return previousValue;

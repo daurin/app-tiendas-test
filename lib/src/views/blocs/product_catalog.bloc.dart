@@ -2,7 +2,7 @@ import 'package:app_tiendas/src/domain/repositories/product_catalog.repository.d
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 
-class ProductCatalogProvider extends ChangeNotifier {
+class ProductCatalogBloc extends ChangeNotifier {
   bool isLoading = true;
   List<ProductEntity> products = [];
 

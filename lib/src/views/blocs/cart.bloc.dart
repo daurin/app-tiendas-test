@@ -3,12 +3,12 @@ import 'package:app_tiendas/src/domain/dtos/add_product_to_cart.dto.dart';
 import 'package:app_tiendas/src/domain/dtos/get_product_cart.dto.dart';
 import 'package:app_tiendas/src/domain/entities/cart_product.entity.dart';
 import 'package:app_tiendas/src/domain/repositories/product_catalog.repository.dart';
-import 'package:app_tiendas/src/views/providers/product_catalog.provider.dart';
+import 'package:app_tiendas/src/views/blocs/product_catalog.bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:provider/provider.dart';
 
-class CartProvider extends ChangeNotifier {
+class CartBloc extends ChangeNotifier {
   bool isLoading = true;
   GetCartDto? cart;
 
@@ -26,7 +26,7 @@ class CartProvider extends ChangeNotifier {
   Future<void> addProductToCart(AddProductToCartDto params) async {
     if (!isProductInCart(params.productId)) {
       cart?.products.add(navigatorContext
-          .read<ProductCatalogProvider>()
+          .read<ProductCatalogBloc>()
           .getProductById(params.productId)!);
       cart?.cartProducts.add(CartProductEntity(
           productId: params.productId, quantity: params.quantity));

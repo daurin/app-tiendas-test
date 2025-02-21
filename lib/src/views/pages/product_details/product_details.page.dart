@@ -1,7 +1,7 @@
 import 'package:app_tiendas/src/domain/repositories/product_catalog.repository.dart';
 import 'package:app_tiendas/src/views/pages/product_details/product_details.page.controller.dart';
-import 'package:app_tiendas/src/views/providers/cart.provider.dart';
-import 'package:app_tiendas/src/views/providers/product_catalog.provider.dart';
+import 'package:app_tiendas/src/views/blocs/cart.bloc.dart';
+import 'package:app_tiendas/src/views/blocs/product_catalog.bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -25,8 +25,8 @@ class _ProductDetailsPageState extends State<ProductDetailsPage>
   @override
   Widget build(BuildContext context) {
     ProductEntity? product =
-        context.select<ProductCatalogProvider, ProductEntity?>(
-            (provider) => provider.getProductById(widget.productId));
+        context.select<ProductCatalogBloc, ProductEntity?>(
+            (bloc) => bloc.getProductById(widget.productId));
 
     return Scaffold(
       appBar: AppBar(
@@ -102,8 +102,8 @@ class _ProductDetailsPageState extends State<ProductDetailsPage>
 
   Widget _buildBottomAppBar() {
     return Builder(builder: (context) {
-      bool isProductInCart = context.select<CartProvider, bool>(
-        (provider) => provider.isProductInCart(widget.productId),
+      bool isProductInCart = context.select<CartBloc, bool>(
+        (bloc) => bloc.isProductInCart(widget.productId),
       );
 
       return BottomAppBar(

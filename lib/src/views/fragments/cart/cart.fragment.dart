@@ -1,6 +1,6 @@
 import 'package:app_tiendas/src/domain/repositories/product_catalog.repository.dart';
 import 'package:app_tiendas/src/views/fragments/cart/cart.fragment.controller.dart';
-import 'package:app_tiendas/src/views/providers/cart.provider.dart';
+import 'package:app_tiendas/src/views/blocs/cart.bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -27,15 +27,15 @@ class _CartFragmentState extends State<CartFragment>
 
   @override
   Widget build(BuildContext context) {
-    CartProvider cartProvider = context.watch<CartProvider>();
+    CartBloc cartBloc = context.watch<CartBloc>();
 
-    if (cartProvider.isLoading) {
+    if (cartBloc.isLoading) {
       return const Center(
         child: CircularProgressIndicator(),
       );
     }
 
-    if (cartProvider.cart?.cartProducts.isEmpty ?? true) {
+    if (cartBloc.cart?.cartProducts.isEmpty ?? true) {
       return const Center(
         child: Text('Carrito vacío'),
       );
@@ -45,9 +45,9 @@ class _CartFragmentState extends State<CartFragment>
       children: [
         Expanded(
           child: ListView.builder(
-            itemCount: cartProvider.cart?.products.length ?? 0,
+            itemCount: cartBloc.cart?.products.length ?? 0,
             itemBuilder: (context, index) {
-              ProductEntity product = cartProvider.cart!.products[index];
+              ProductEntity product = cartBloc.cart!.products[index];
 
               return ValueListenableBuilder(
                 valueListenable: cartQuantityNotifier,
@@ -71,7 +71,7 @@ class _CartFragmentState extends State<CartFragment>
                             onTapRemoveFromCart(product.id),
                       ),
                       // if last
-                      if (index == cartProvider.cart!.products.length - 1)
+                      if (index == cartBloc.cart!.products.length - 1)
                         Container(
                           width: double.infinity,
                           padding: const EdgeInsets.only(
@@ -104,7 +104,7 @@ class _CartFragmentState extends State<CartFragment>
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Total: ${cartProvider.totalFormatted}',
+                  'Total: ${cartBloc.totalFormatted}',
                   style: const TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,

@@ -1,6 +1,6 @@
 import 'package:app_tiendas/src/views/fragments/products_catalog/product_catalog.fragment.controller.dart';
-import 'package:app_tiendas/src/views/providers/cart.provider.dart';
-import 'package:app_tiendas/src/views/providers/product_catalog.provider.dart';
+import 'package:app_tiendas/src/views/blocs/cart.bloc.dart';
+import 'package:app_tiendas/src/views/blocs/product_catalog.bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -27,23 +27,23 @@ class _ProductCatalogFragmentState extends State<ProductCatalogFragment>
 
   @override
   Widget build(BuildContext context) {
-    ProductCatalogProvider productCatalogProvider =
-        context.watch<ProductCatalogProvider>();
+    ProductCatalogBloc productCatalogBloc =
+        context.watch<ProductCatalogBloc>();
 
-    if (productCatalogProvider.isLoading) {
+    if (productCatalogBloc.isLoading) {
       return const Center(
         child: CircularProgressIndicator(),
       );
     }
 
     return ListView.builder(
-      itemCount: productCatalogProvider.products.length,
+      itemCount: productCatalogBloc.products.length,
       itemBuilder: (context, index) {
-        final product = productCatalogProvider.products[index];
+        final product = productCatalogBloc.products[index];
 
         return Builder(builder: (context) {
-          bool isProductInCart = context.select<CartProvider, bool>(
-            (provider) => provider.isProductInCart(product.id),
+          bool isProductInCart = context.select<CartBloc, bool>(
+            (bloc) => bloc.isProductInCart(product.id),
           );
 
           return _buildProductCard(
