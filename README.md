@@ -31,6 +31,8 @@ Este proyecto es una aplicación móvil desarrollada con Flutter.
     flutter run
     ```
 
+La primera vez puede tardar mas de lo normal
+
 ## Compilación
 
 Para compilar la aplicación para producción, usa el siguiente comando:
@@ -41,4 +43,3 @@ flutter build apk --release
 ## Información adicional
 
 Para más información sobre Flutter, visita la [documentación oficial](https://flutter.dev/docs).
-
